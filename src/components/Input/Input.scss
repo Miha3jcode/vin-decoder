@@ -1,0 +1,27 @@
+@import 'src/assets/utils';
+@import 'src/assets/colors';
+
+.input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    $fz: 22px;
+    font: $fz/em(40px, $fz) sans-serif;
+  }
+
+  &__element {
+    $fz: 18px;
+    padding: 0 em(10px, $fz);
+    font: $fz/em(36px, $fz) sans-serif;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  &__error {
+    $fz: 14px;
+    margin: em(8) 0 0 0;
+    font: $fz/em(20px, $fz) sans-serif;
+    color: $systemDanger;
+  }
+}
