@@ -2,7 +2,7 @@ import './Button.scss';
 
 import React from 'react';
 
-function Button({className, onClick, children, ...props}) {
+function Button({className, children, type, onClick, ...props}) {
   return (
     <div
       {...props}
@@ -13,6 +13,7 @@ function Button({className, onClick, children, ...props}) {
     >
       <button
        className={'button__element'}
+       type={type}
        onClick={onClick}
       >{children}</button>
     </div>
