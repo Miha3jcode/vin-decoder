@@ -1,14 +1,32 @@
 @import 'src/assets/utils';
+@import 'src/assets/colors';
 
 .main {
+  padding: em(20);
+
+  &__title {
+    $fz: 20px;
+    margin: em(30px, $fz) 0 em(10px, $fz) 0;
+    font: $fz/em(30px, $fz) sans-serif;
+  }
+
   &__form {
     display: flex;
     flex-direction: column;
-    padding: em(20);
     width: em(400);
   }
 
   &__decode-button {
     margin: em(16) 0 0 0;
+  }
+
+  &__list-text {
+    $fz: 16px;
+    font: $fz/em(20px, $fz) sans-serif;
+    color: $gray;
+  }
+
+  &__list-label {
+    color: $black;
   }
 }
