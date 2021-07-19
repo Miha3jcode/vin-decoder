@@ -1,5 +1,5 @@
-import vehicle from "./slices/vehilce";
+import vehicles from "./slices/vehicles";
 
 export default {
-  vehicle,
+  vehicles,
 };

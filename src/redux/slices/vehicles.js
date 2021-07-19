@@ -11,6 +11,7 @@ const slice = 'vehicles';
 
 const initialState = {
   currentVinCode: null,
+  cacheLimit: 5,
   vins: [],
   loading: 'idle',
 };
@@ -20,17 +21,10 @@ export const decodeVin = createAsyncThunk(
   async function (vinCode, {getState}) {
 
     const state = getState();
-    console.log('stata', state)
-    const vins = state.vehicle.vins;
-
+    const vins = state.vehicles.vins;
     const index = vins.findIndex(vin => vin.vinCode === vinCode);
 
-    if (index > -1) {
-      return {
-        vin: vins[index],
-        isCached: true,
-      };
-    }
+    if (index > -1) return vins[index]
 
     const response = await api.vehiclesAPI.decode(vinCode);
 
@@ -39,18 +33,15 @@ export const decodeVin = createAsyncThunk(
       .map(mappers.mapVariable);
 
     return {
-      vin: {
-        vinCode: vinCode,
-        properties: properties,
-        message: response.data.Message,
-      },
-      isCached: false,
+      vinCode: vinCode,
+      properties: properties,
+      message: response.data.Message,
     };
   },
   {
     condition(vinCode, {getState}) {
       const state = getState();
-      if (state.vehicle.loading === 'pending') return false;
+      if (state.vehicles.loading === 'pending') return false;
     },
   },
 );
@@ -66,21 +57,24 @@ const vehicle = createSlice({
     });
 
     builder.addCase(decodeVin.fulfilled, (state, action) => {
-      state.currentVinCode = action.payload.vin.vinCode;
+      state.currentVinCode = action.payload.vinCode;
+      state.loading = action.meta.requestStatus;
 
-      if (action.payload.isCached) {
-        const index = state.vins.findIndex(vin => vin.vinCode === action.payload.vin.vinCode);
-        state.vins = state.vins
-          .slice(0, index)
-          .concat(state.vins.slice(index, state.vins.length - 1));
+      const index = state.vins.findIndex(vin => vin.vinCode === action.payload.vinCode);
+
+      if (index > -1) {
+        // move current vin at history start
+        state.vins.splice(index, 1);
+        state.vins.splice(0, 0, action.payload);
       } else {
-        state.vins = [
-          action.payload.vin,
-          ...state.vins,
-        ];
-        state.vins.pop();
-      }
+        // add new vin
+        state.vins.splice(0, 0, action.payload);
 
+        // remove last vin if there are more then cache limit
+        if (state.vins.length > state.cacheLimit) {
+          state.vins.splice(state.vins.length - 1, 1);
+        }
+      }
     });
 
     builder.addCase(decodeVin.rejected, (state, action) => {
@@ -92,8 +86,9 @@ const vehicle = createSlice({
 
 export default vehicle.reducer
 
-export const selectCurrentVinCode = state => state.vehicle.currentVinCode;
-export const selectVins = state => state.vehicle.vins;
+export const selectCurrentVinCode = state => state.vehicles.currentVinCode;
+export const selectVins = state => state.vehicles.vins;
+export const selectIsVinLoading = state => state.vehicles.loading === 'pending';
 
 export const selectVinCodes = createSelector(
   selectVins,

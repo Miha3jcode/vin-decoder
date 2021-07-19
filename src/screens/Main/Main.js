@@ -30,21 +30,28 @@ import {
 
 import {
   decodeVin,
-  selectVin,
-} from 'redux/slices/vehilce';
+  selectCurrentVinCode,
+  selectIsVinLoading,
+  selectCurrentVin,
+  selectVinCodes,
+} from 'redux/slices/vehicles';
 
 const VinSchema = Yup.object().shape({
   vin: validators.vin,
 });
 
 const initialValues = {
-  vin: '',
+  vin: '5UXWX7C5',
 };
 
 function Main() {
 
   const decodeVinCallback = useReduxCallback(decodeVin);
-  const vin = useSelector(selectVin);
+
+  const currentVinCode = useSelector(selectCurrentVinCode);
+  const isVinLoading = useSelector(selectIsVinLoading);
+  const currentVin = useSelector(selectCurrentVin);
+  const vinCodes = useSelector(selectVinCodes);
 
   const onSubmitHandler = useCallback(
     (fields) => decodeVinCallback(fields.vin),
@@ -66,6 +73,8 @@ function Main() {
               <Field label={'Vin:'} name={'vin'} component={Input}/>
               <Button
                 className={'main__decode-button'}
+                type={'submit'}
+                disabled={isVinLoading}
                 onClick={handleSubmit}
               >
                 decode
@@ -74,11 +83,27 @@ function Main() {
           )
         }}
       </Formik>
-      <p className={'main__title'}>Vin properties:</p>
-      <List items={vin}>
+      <p className={'main__title'}>History</p>
+      <List>
         {
-          vin
-            ? vin.map(p => (
+          vinCodes
+            ? vinCodes.map((code, key) => (
+              <List.Item key={key}>
+                <p className={'main__list-text'}>{code}</p>
+              </List.Item>
+            ))
+            : null
+        }
+      </List>
+      <p className={'main__title'}>
+        {'Vin properties'}
+        {currentVinCode && ` (${currentVinCode})`}
+        {':'}
+      </p>
+      <List>
+        {
+          currentVin
+            ? currentVin.properties.map(p => (
               <List.Item key={p.id}>
                 <p className={'main__list-text'}>
                   <span className={'main__list-label'}>{p.label}:</span>
