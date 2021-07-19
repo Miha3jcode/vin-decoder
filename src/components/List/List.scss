@@ -1,0 +1,21 @@
+@import 'src/assets/utils';
+@import 'src/assets/colors';
+
+.list {
+  list-style: none;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: em(12);
+    border-bottom: em(1) solid $gray;
+
+    &:first-child {
+      border-top: em(1) solid $gray;
+    }
+
+    &:not(:first-child) {
+      margin: em(12) 0 0 0;
+    }
+  }
+}
