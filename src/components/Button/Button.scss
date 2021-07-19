@@ -1,0 +1,13 @@
+@import 'src/assets/utils';
+
+.button {
+  &__element {
+    $fz: 18px;
+    padding: 0 em(20px, $fz);
+    font: 500 $fz/em(36px, $fz) sans-serif;
+    text-transform: uppercase;
+    color: #444;
+    width: 100%;
+    cursor: pointer;
+  }
+}
