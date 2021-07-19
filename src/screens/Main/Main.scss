@@ -1,0 +1,14 @@
+@import 'src/assets/utils';
+
+.main {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: em(20);
+    width: em(400);
+  }
+
+  &__decode-button {
+    margin: em(16) 0 0 0;
+  }
+}
