@@ -95,6 +95,12 @@ function Main() {
             : null
         }
       </List>
+      <p className={'main__title'}>Message:</p>
+      {
+        currentVin
+          ? <p className={'main__list-text'}>{currentVin.message}</p>
+          : null
+      }
       <p className={'main__title'}>
         {'Vin properties'}
         {currentVinCode && ` (${currentVinCode})`}
