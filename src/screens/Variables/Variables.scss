@@ -1,0 +1,9 @@
+@import 'src/assets/utils';
+
+.variables {
+  padding: em(16);
+
+  &__title {
+    margin: 0 0 em(10px, 18px) 0;
+  }
+}

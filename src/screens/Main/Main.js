@@ -1,3 +1,4 @@
+import 'assets/scss/fonts.scss';
 import './Main.scss';
 
 import React from 'react';
@@ -40,8 +41,12 @@ const VinSchema = Yup.object().shape({
   vin: validators.vin,
 });
 
+const vinDefault = process.env.NODE_ENV === 'development'
+  ? '5UXWX7C5'
+  : '';
+
 const initialValues = {
-  vin: '5UXWX7C5',
+  vin: vinDefault,
 };
 
 function Main() {
@@ -83,25 +88,25 @@ function Main() {
           )
         }}
       </Formik>
-      <p className={'main__title'}>History</p>
+      <p className={'title main__title'}>History</p>
       <List>
         {
           vinCodes
             ? vinCodes.map((code, key) => (
               <List.Item key={key}>
-                <p className={'main__list-text'}>{code}</p>
+                <p className={'subtext'}>{code}</p>
               </List.Item>
             ))
             : null
         }
       </List>
-      <p className={'main__title'}>Message:</p>
+      <p className={'title main__title'}>Message:</p>
       {
         currentVin
-          ? <p className={'main__list-text'}>{currentVin.message}</p>
+          ? <p className={'subtext'}>{currentVin.message}</p>
           : null
       }
-      <p className={'main__title'}>
+      <p className={'title main__title'}>
         {'Vin properties'}
         {currentVinCode && ` (${currentVinCode})`}
         {':'}
@@ -111,8 +116,8 @@ function Main() {
           currentVin
             ? currentVin.properties.map(p => (
               <List.Item key={p.id}>
-                <p className={'main__list-text'}>
-                  <span className={'main__list-label'}>{p.label}:</span>
+                <p className={'subtext'}>
+                  <span className={'text'}>{p.label}:</span>
                   {' '}
                   {p.value}
                 </p>

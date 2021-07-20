@@ -4,12 +4,6 @@
 .main {
   padding: em(20);
 
-  &__title {
-    $fz: 20px;
-    margin: em(40px, $fz) 0 em(10px, $fz) 0;
-    font: $fz/em(30px, $fz) sans-serif;
-  }
-
   &__form {
     display: flex;
     flex-direction: column;
@@ -21,13 +15,8 @@
     margin: em(16) 0 0 0;
   }
 
-  &__list-text {
-    $fz: 16px;
-    font: $fz/em(20px, $fz) sans-serif;
-    color: $gray;
-  }
-
-  &__list-label {
-    color: $black;
+  &__title {
+    $fz: 20px;
+    margin: em(40px, $fz) 0 em(10px, $fz) 0;
   }
 }

@@ -1,9 +1,9 @@
-import {nanoid} from 'nanoid';
-
-export default function mapVariable(variable) {
+export default function mapVariables(property) {
   return {
-    id: nanoid(),
-    label: variable.Variable,
-    value: variable.Value
+    id: property.ID,
+    description: property.Description,
+    dataType: property.DataType,
+    groupName: property.GroupName,
+    name: property.Name,
   };
 }

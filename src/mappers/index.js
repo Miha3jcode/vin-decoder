@@ -1,5 +1,9 @@
+import mapProperty from "./mapProperty";
 import mapVariable from "./mapVariable";
 
-export default {
+const mappers = {
+  mapProperty,
   mapVariable,
 };
+
+export default mappers;

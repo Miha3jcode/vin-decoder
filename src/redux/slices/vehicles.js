@@ -6,6 +6,7 @@ import {
 
 import api from 'api';
 import mappers from 'mappers';
+import utils from 'utils';
 
 const slice = 'vehicles';
 
@@ -14,6 +15,7 @@ const initialState = {
   cacheLimit: 5,
   vins: [],
   loading: 'idle',
+  variables: [],
 };
 
 export const decodeVin = createAsyncThunk(
@@ -28,9 +30,9 @@ export const decodeVin = createAsyncThunk(
 
     const response = await api.vehiclesAPI.decode(vinCode);
 
-    const properties =  response.data.Results
+    const properties = response.data.Results
       .filter(variable => variable.Value)
-      .map(mappers.mapVariable);
+      .map(mappers.mapProperty);
 
     return {
       vinCode: vinCode,
@@ -39,12 +41,23 @@ export const decodeVin = createAsyncThunk(
     };
   },
   {
-    condition(vinCode, {getState}) {
-      const state = getState();
-      if (state.vehicles.loading === 'pending') return false;
-    },
+    condition: utils.pendingCondition,
   },
 );
+
+export const getVariables = createAsyncThunk(
+  slice + '/getVariables',
+  async function () {
+
+    const response = await api.vehiclesAPI.getProperties();
+
+    return response.data.Results
+      .map(mappers.mapVariable);
+  },
+  {
+    condition: utils.pendingCondition,
+  },
+)
 
 const vehicle = createSlice({
   name: slice,
@@ -81,6 +94,10 @@ const vehicle = createSlice({
       state.loading = action.meta.requestStatus;
     });
 
+    builder.addCase(getVariables.fulfilled, (state, action) => {
+      state.variables = action.payload;
+    });
+
   },
 });
 
@@ -89,6 +106,7 @@ export default vehicle.reducer
 export const selectCurrentVinCode = state => state.vehicles.currentVinCode;
 export const selectVins = state => state.vehicles.vins;
 export const selectIsVinLoading = state => state.vehicles.loading === 'pending';
+export const selectVariables = state => state.vehicles.variables;
 
 export const selectVinCodes = createSelector(
   selectVins,

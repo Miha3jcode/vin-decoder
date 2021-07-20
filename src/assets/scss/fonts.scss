@@ -1,0 +1,18 @@
+@import 'src/assets/utils';
+@import 'src/assets/colors';
+
+.title {
+  $fz: 20px;
+  font: $fz/em(30px, $fz) sans-serif;
+}
+
+.text {
+  $fz: 16px;
+  font: $fz/em(20px, $fz) sans-serif;
+  color: $black;
+}
+
+.subtext {
+  @extend .text;
+  color: $gray;
+}
