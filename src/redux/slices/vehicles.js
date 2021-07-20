@@ -15,7 +15,11 @@ const initialState = {
   cacheLimit: 5,
   vins: [],
   loading: 'idle',
+
   variables: [],
+
+  variableValues: [],
+  variableValuesLoading: 'idle',
 };
 
 export const decodeVin = createAsyncThunk(
@@ -57,7 +61,21 @@ export const getVariables = createAsyncThunk(
   {
     condition: utils.pendingCondition,
   },
-)
+);
+
+export const getVariableValues = createAsyncThunk(
+  slice + '/getVariableValues',
+  async function (variableId) {
+
+    const response = await api.vehiclesAPI.getPropertyValues(variableId);
+
+    return response.data.Results
+      .map(mappers.mapVariableValue);
+  },
+  {
+    condition: utils.pendingCondition,
+  },
+);
 
 const vehicle = createSlice({
   name: slice,
@@ -98,6 +116,19 @@ const vehicle = createSlice({
       state.variables = action.payload;
     });
 
+    builder.addCase(getVariableValues.pending, (state, action) => {
+      state.variableValuesLoading = action.meta.requestStatus;
+    });
+
+    builder.addCase(getVariableValues.fulfilled, (state, action) => {
+      state.variableValues = action.payload;
+      state.variableValuesLoading = action.meta.requestStatus;
+    });
+
+    builder.addCase(getVariableValues.rejected, (state, action) => {
+      state.variableValuesLoading = action.meta.requestStatus;
+    });
+
   },
 });
 
@@ -106,7 +137,11 @@ export default vehicle.reducer
 export const selectCurrentVinCode = state => state.vehicles.currentVinCode;
 export const selectVins = state => state.vehicles.vins;
 export const selectIsVinLoading = state => state.vehicles.loading === 'pending';
+
 export const selectVariables = state => state.vehicles.variables;
+
+export const selectVariableValues = state => state.vehicles.variableValues;
+export const selectVariableValuesLoading = state => state.vehicles.variableValuesLoading;
 
 export const selectVinCodes = createSelector(
   selectVins,
@@ -118,3 +153,18 @@ export const selectCurrentVin = createSelector(
   selectVins,
   (currentVinCode, vins) => vins.find(vin => vin.vinCode === currentVinCode),
 );
+
+export const selectCurrentVariable = createSelector(
+  selectVariableValues,
+  (values) => {
+    const value = values.find(value => {
+        console.log('value')
+        console.log(value.variableName)
+        return value.variableName
+      })
+
+    if (!value) return '';
+
+    return value.variableName;
+  }
+)

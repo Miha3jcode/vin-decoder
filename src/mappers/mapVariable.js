@@ -1,9 +1,9 @@
-export default function mapVariables(property) {
+export default function mapVariables(variable) {
   return {
-    id: property.ID,
-    description: property.Description,
-    dataType: property.DataType,
-    groupName: property.GroupName,
-    name: property.Name,
+    id: variable.ID,
+    description: variable.Description,
+    dataType: variable.DataType,
+    groupName: variable.GroupName,
+    name: variable.Name,
   };
 }

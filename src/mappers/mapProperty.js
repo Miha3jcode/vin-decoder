@@ -1,9 +1,11 @@
 import {nanoid} from 'nanoid';
 
-export default function mapProperty(variable) {
+export default function mapProperty(property) {
   return {
     id: nanoid(),
-    label: variable.Variable,
-    value: variable.Value
+    variableId: property.VariableId,
+    valueId: property.ValueId,
+    label: property.Variable,
+    value: property.Value
   };
 }

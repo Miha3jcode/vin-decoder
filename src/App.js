@@ -11,6 +11,7 @@ import {
 
 import MainScreen from 'screens/MainScreen/MainScreen';
 import VariablesScreen from 'screens/VariablesScreen/VariablesScreen';
+import VariableScreen from "./screens/VariableScreen/VariableScreen";
 
 function App() {
   return (
@@ -20,8 +21,11 @@ function App() {
         <Route exact path="/">
           <MainScreen/>
         </Route>
-        <Route path={'/variables'}>
+        <Route exact path={'/variables'}>
           <VariablesScreen/>
+        </Route>
+        <Route exact path={'/variables/:variableId'}>
+          <VariableScreen/>
         </Route>
       </Switch>
     </div>

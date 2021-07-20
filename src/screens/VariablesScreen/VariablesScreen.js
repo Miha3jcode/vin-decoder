@@ -37,7 +37,7 @@ function VariablesScreen() {
   );
 
   return (
-    <div className={'variables-screen'}>
+    <main className={'variables-screen'}>
       <p className={'title variables-screen__title'}>Variables:</p>
       <List>
         {
@@ -55,7 +55,7 @@ function VariablesScreen() {
             : null
         }
       </List>
-    </div>
+    </main>
   );
 }
 

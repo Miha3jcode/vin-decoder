@@ -10,6 +10,11 @@ const vehiclesAPI = {
     return api.get(`/vehicles/GetVehicleVariableList?format=json`);
   },
 
+  getPropertyValues(variableId) {
+    console.log('variableId', variableId)
+    return api.get(`/vehicles/GetVehicleVariableValuesList/${variableId}?format=json`);
+  },
+
 };
 
 export default vehiclesAPI;

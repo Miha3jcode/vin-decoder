@@ -1,0 +1,9 @@
+@import "src/assets/utils";
+
+.variable-screen {
+  padding: em(16);
+
+  &__title {
+    margin: 0 0 em(12px, 18px) 0;
+  }
+}

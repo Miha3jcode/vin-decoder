@@ -20,6 +20,10 @@ import {
 } from 'formik';
 
 import {
+  Link,
+} from 'react-router-dom';
+
+import {
   useReduxCallback,
 } from 'hooks';
 
@@ -69,7 +73,7 @@ function MainScreen() {
   );
 
   return (
-    <div className={'main-screen'}>
+    <main className={'main-screen'}>
       <Formik
         initialValues={initialValues}
         validationSchema={VinSchema}
@@ -125,19 +129,26 @@ function MainScreen() {
       <List>
         {
           currentVin
-            ? currentVin.properties.map(p => (
-              <List.Item key={p.id}>
-                <p className={'subtext'}>
-                  <span className={'text'}>{p.label}:</span>
-                  {' '}
-                  {p.value}
-                </p>
-              </List.Item>
-            ))
+            ? currentVin.properties.map(property => {
+
+              const label = property.valueId
+                ? <Link to={`/variables/${property.variableId}`}>{property.label}</Link>
+                : property.label;
+
+              return (
+                <List.Item key={property.id}>
+                  <p className={'subtext'}>
+                    <span className={'text'}>{label}:</span>
+                    {' '}
+                    {property.value}
+                  </p>
+                </List.Item>
+              );
+            })
             : null
         }
       </List>
-    </div>
+    </main>
   );
 }
 
