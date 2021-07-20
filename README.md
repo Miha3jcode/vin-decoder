@@ -1,6 +1,6 @@
 # GitHub.io
 
-### [https://miha3jcode.github.io/vin-decoder/](https://miha3jcode.github.io/vin-decoder/)
+### [https://miha3jcode.github.io/vin-decoder](https://miha3jcode.github.io/vin-decoder/)
 
 # Getting Started with Create React App
 
