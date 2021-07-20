@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/vin-decoder/static/css/main.5122c0b1.chunk.css",
-    "main.js": "/vin-decoder/static/js/main.c790896c.chunk.js",
-    "main.js.map": "/vin-decoder/static/js/main.c790896c.chunk.js.map",
+    "main.js": "/vin-decoder/static/js/main.e0052ce2.chunk.js",
+    "main.js.map": "/vin-decoder/static/js/main.e0052ce2.chunk.js.map",
     "runtime-main.js": "/vin-decoder/static/js/runtime-main.23c8d33b.js",
     "runtime-main.js.map": "/vin-decoder/static/js/runtime-main.23c8d33b.js.map",
     "static/js/2.18cf8e0d.chunk.js": "/vin-decoder/static/js/2.18cf8e0d.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.23c8d33b.js",
     "static/js/2.18cf8e0d.chunk.js",
     "static/css/main.5122c0b1.chunk.css",
-    "static/js/main.c790896c.chunk.js"
+    "static/js/main.e0052ce2.chunk.js"
   ]
 }
