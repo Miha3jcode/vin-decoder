@@ -157,11 +157,7 @@ export const selectCurrentVin = createSelector(
 export const selectCurrentVariable = createSelector(
   selectVariableValues,
   (values) => {
-    const value = values.find(value => {
-        console.log('value')
-        console.log(value.variableName)
-        return value.variableName
-      })
+    const value = values.find(value => value.variableName);
 
     if (!value) return '';
 

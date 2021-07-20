@@ -1,5 +1,7 @@
 import vin from './vin';
 
-export default {
+const validators = {
   vin,
 };
+
+export default validators;

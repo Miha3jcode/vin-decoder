@@ -1,5 +1,7 @@
 import vehiclesAPI from "./vehicles";
 
-export default {
+const api = {
   vehiclesAPI,
 };
+
+export default api;

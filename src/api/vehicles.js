@@ -11,7 +11,6 @@ const vehiclesAPI = {
   },
 
   getPropertyValues(variableId) {
-    console.log('variableId', variableId)
     return api.get(`/vehicles/GetVehicleVariableValuesList/${variableId}?format=json`);
   },
 

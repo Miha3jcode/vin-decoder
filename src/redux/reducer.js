@@ -1,5 +1,7 @@
 import vehicles from "./slices/vehicles";
 
-export default {
+const reducer = {
   vehicles,
 };
+
+export default reducer;
