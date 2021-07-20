@@ -1,0 +1,28 @@
+@import 'src/assets/colors';
+@import 'src/assets/utils';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: em(16);
+  height: em(32px);
+  background: $lightGray;
+
+  &__links {
+    display: flex;
+  }
+
+  &__link {
+    padding: 0 em(16);
+  }
+
+  @media screen and (max-width: 440px) {
+    flex-direction: column;
+    align-items: center;
+
+    &__links {
+      margin: em(12) 0 0 0;
+    }
+  }
+}
