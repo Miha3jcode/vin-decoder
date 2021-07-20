@@ -1,5 +1,5 @@
 import 'assets/scss/fonts.scss';
-import './Variables.scss';
+import './VariablesScreen.scss';
 
 import React from 'react';
 
@@ -25,7 +25,7 @@ import {
   selectVariables,
 } from 'redux/slices/vehicles';
 
-function Variables() {
+function VariablesScreen() {
 
   const getVariablesCallback = useReduxCallback(getVariables);
 
@@ -37,8 +37,8 @@ function Variables() {
   );
 
   return (
-    <div className={'variables'}>
-      <p className={'title variables__title'}>Variables:</p>
+    <div className={'variables-screen'}>
+      <p className={'title variables-screen__title'}>Variables:</p>
       <List>
         {
           variables
@@ -59,4 +59,4 @@ function Variables() {
   );
 }
 
-export default Variables;
+export default VariablesScreen;

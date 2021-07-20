@@ -1,5 +1,5 @@
 import 'assets/scss/fonts.scss';
-import './Main.scss';
+import './MainScreen.scss';
 
 import React from 'react';
 import * as Yup from 'yup';
@@ -49,7 +49,7 @@ const initialValues = {
   vin: vinDefault,
 };
 
-function Main() {
+function MainScreen() {
 
   const decodeVinCallback = useReduxCallback(decodeVin);
 
@@ -69,7 +69,7 @@ function Main() {
   );
 
   return (
-    <div className={'main'}>
+    <div className={'main-screen'}>
       <Formik
         initialValues={initialValues}
         validationSchema={VinSchema}
@@ -79,10 +79,10 @@ function Main() {
       >
         {({handleSubmit}) => {
           return (
-            <div className={'main__form'}>
+            <div className={'main-screen__form'}>
               <Field label={'Vin:'} name={'vin'} component={Input}/>
               <Button
-                className={'main__decode-button'}
+                className={'main-screen__decode-button'}
                 type={'submit'}
                 disabled={isVinLoading}
                 onClick={handleSubmit}
@@ -93,7 +93,7 @@ function Main() {
           )
         }}
       </Formik>
-      <p className={'title main__title'}>History</p>
+      <p className={'title main-screen__title'}>History</p>
       <List>
         {
           vinCodes
@@ -111,13 +111,13 @@ function Main() {
             : null
         }
       </List>
-      <p className={'title main__title'}>Message:</p>
+      <p className={'title main-screen__title'}>Message:</p>
       {
         currentVin
           ? <p className={'subtext'}>{currentVin.message}</p>
           : null
       }
-      <p className={'title main__title'}>
+      <p className={'title main-screen__title'}>
         {'Vin properties'}
         {currentVinCode && ` (${currentVinCode})`}
         {':'}
@@ -146,4 +146,4 @@ function handleOnCodeClick(event, decodeVinCallback) {
   decodeVinCallback(event.target.dataset.code);
 }
 
-export default Main;
+export default MainScreen;

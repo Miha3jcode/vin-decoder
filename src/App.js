@@ -9,8 +9,8 @@ import {
   Header,
 } from 'components';
 
-import Main from 'screens/Main/Main';
-import Variables from 'screens/Variables/Variables';
+import MainScreen from 'screens/MainScreen/MainScreen';
+import VariablesScreen from 'screens/VariablesScreen/VariablesScreen';
 
 function App() {
   return (
@@ -18,10 +18,10 @@ function App() {
       <Header/>
       <Switch>
         <Route exact path="/">
-          <Main/>
+          <MainScreen/>
         </Route>
         <Route path={'/variables'}>
-          <Variables/>
+          <VariablesScreen/>
         </Route>
       </Switch>
     </div>
