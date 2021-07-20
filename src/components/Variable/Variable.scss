@@ -1,7 +1,12 @@
 @import 'src/assets/utils';
+@import 'src/assets/scss/fonts';
 
 .variable {
   &__header {
     margin: 0 0 em(8) 0;
+  }
+
+  &__description > * {
+    @extend .subtext;
   }
 }

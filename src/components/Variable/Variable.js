@@ -36,11 +36,14 @@ function Variable({className, name, groupName, description, dataType, ...props})
       {
         description
           ? (
-            <p className={'text'}>
-              {'Description:'}
-              {' '}
-              <span className={'subtext'}>{description}</span>
-            </p>
+            <>
+              <p className={'text'}>
+                {'Description:'}
+              </p>
+              <div className={'variable__description'}>
+                {description}
+              </div>
+            </>
           )
           : null
       }
