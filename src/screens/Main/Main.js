@@ -11,7 +11,7 @@ import {
 } from "react";
 
 import {
-  useSelector
+  useSelector,
 } from "react-redux";
 
 import {
@@ -63,6 +63,11 @@ function Main() {
     [decodeVinCallback],
   );
 
+  const onCodeClickHandler = useCallback(
+    (event) => handleOnCodeClick(event, decodeVinCallback),
+    [decodeVinCallback],
+  );
+
   return (
     <div className={'main'}>
       <Formik
@@ -92,9 +97,15 @@ function Main() {
       <List>
         {
           vinCodes
-            ? vinCodes.map((code, key) => (
+            ? vinCodes.map((code, key) =>(
               <List.Item key={key}>
-                <p className={'subtext'}>{code}</p>
+                <a
+                  href={'#'}
+                  data-code={code}
+                  onClick={onCodeClickHandler}
+                >
+                  {code}
+                </a>
               </List.Item>
             ))
             : null
@@ -128,6 +139,11 @@ function Main() {
       </List>
     </div>
   );
+}
+
+function handleOnCodeClick(event, decodeVinCallback) {
+  event.preventDefault();
+  decodeVinCallback(event.target.dataset.code);
 }
 
 export default Main;
